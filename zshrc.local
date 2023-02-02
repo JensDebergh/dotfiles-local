@@ -1,0 +1,29 @@
+# Adds typeahead suggestions for zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Recommended by brew doctor
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.bin:$PATH"
+# Load local homebrew
+export PATH="$HOME/homebrew/bin:$PATH"
+# Load node modules
+export PATH="$PATH:/usr/local/lib/node_modules"
+
+# ==== TMUX ====
+_not_inside_tmux() { [[ -z "$TMUX" ]] }
+
+ensure_tmux_is_running() {
+  if _not_inside_tmux; then
+    tat
+  fi
+}
+
+ensure_tmux_is_running
+
+# Autoload 
+autoload -Uz compinit
+compinit
+
+eval "$(ssh-agent -s)" > /dev/null
+
+# recommended by brew doctor
+export PATH="/usr/local/bin:$PATH"
